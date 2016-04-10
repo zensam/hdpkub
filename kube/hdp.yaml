@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hdpkub
+  labels: 
+    name: hdpkub
+spec: 
+  containers: 
+    - resources:
+        limits :
+          cpu: 4
+          memory: 8192Mi
+      image: singen/hdpkub
+      name: hdpkub
+      
+      ports: 
+        - containerPort: 8080
+          name: hdpkub
+  

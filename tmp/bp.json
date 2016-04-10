@@ -1,0 +1,51 @@
+{ "configurations" : [
+    {
+      "flume-env" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "flume_conf_dir" : "/etc/flume/conf",
+          "flume_log_dir" : "/var/log/flume",
+          "flume_run_dir" : "/var/run/flume",
+          "content" : "\n# Licensed to the Apache Software Foundation (ASF) under one or more\n# contributor license agreements.  See the NOTICE file distributed with\n# this work for additional information regarding copyright ownership.\n# The ASF licenses this file to You under the Apache License, Version 2.0\n# (the \"License\"); you may not use this file except in compliance with\n# the License.  You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n\n# If this file is placed at FLUME_CONF_DIR/flume-env.sh, it will be sourced\n# during Flume startup.\n\n# Enviroment variables can be set here.\n\nexport JAVA_HOME={{java_home}}\n\n# Give Flume more memory and pre-allocate, enable remote monitoring via JMX\n# export JAVA_OPTS=\"-Xms100m -Xmx2000m -Dcom.sun.management.jmxremote\"\n\n# Note that the Flume conf directory is always included in the classpath.\n# Add flume sink to classpath\nif [ -e \"/usr/lib/flume/lib/ambari-metrics-flume-sink.jar\" ]; then\n  export FLUME_CLASSPATH=$FLUME_CLASSPATH:/usr/lib/flume/lib/ambari-metrics-flume-sink.jar\nfi\n\nexport HIVE_HOME={{flume_hive_home}}\nexport HCAT_HOME={{flume_hcat_home}}",
+          "flume_user" : "flume"
+        }
+      }
+    },
+    { "flume-conf" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "content" : "\n# Flume agent config\n\n# Name the components on this agent \na1.sources = r1\na1.sinks = k1 \na1.channels = c1\n\n# Describe/configure the source \na1.sources.r1.type = netcat \na1.sources.r1.bind = localhost \na1.sources.r1.port = 44444\n\n# Describe the sink \na1.sinks.k1.type = logger\n\n# Use a channel that buffers events in memory \na1.channels.c1.type = memory \na1.channels.c1.capacity = 1000\na1.channels.c1.transactionCapacity = 100\n\n# Bind the source and sink to the channel \na1.sources.r1.channels = c1 \na1.sinks.k1.channel = c1"
+        }
+      },
+  } ],
+"host_groups" : [
+    { "components" : [
+        { "name" : "NODEMANAGER" },
+        { "name" : "YARN_CLIENT" },
+        { "name" : "HDFS_CLIENT" },
+        { "name" : "HISTORYSERVER" },
+        { "name" : "METRICS_MONITOR" },
+        { "name" : "HBASE_MASTER" },
+        { "name" : "HBASE_CLIENT" },
+        { "name" : "AMBARI_SERVER" },
+        { "name" : "ZOOKEEPER_SERVER" },
+        { "name" : "NAMENODE" },
+        { "name" : "TEZ_CLIENT" },
+        { "name" : "APP_TIMELINE_SERVER" },
+        { "name" : "SECONDARY_NAMENODE" },
+        { "name" : "RESOURCEMANAGER" },
+        { "name" : "MAPREDUCE2_CLIENT" },
+        { "name" : "ZOOKEEPER_CLIENT" },
+        { "name" : "PIG" },
+        { "name" : "FLUME_HANDLER" },
+        { "name" : "METRICS_COLLECTOR" },
+        { "name" : "DATANODE" },
+        { "name" : "HCAT" },
+        { "name" : "PIG" } ],
+      "configurations" : [ ],
+      "name" : "host_group_1",
+      "cardinality" : "1" } ],
+  "Blueprints" : {
+    "stack_name" : "HDP",
+    "stack_version" : "2.3" }
+

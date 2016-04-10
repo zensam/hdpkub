@@ -1,0 +1,88 @@
+{
+  "configurations" : [
+    {
+      "flume-conf" : {
+        "properties_attributes" : { },
+        "properties" : {
+          "content" : "\n# Flume agent config\n\n# Name the components on this agent \na1.sources = r1\na1.sinks = k1 \na1.channels = c1\n\n# Describe/configure the source \na1.sources.r1.type = netcat \na1.sources.r1.bind = localhost \na1.sources.r1.port = 44444\n\n# Describe the sink \na1.sinks.k1.type = logger\n\n# Use a channel that buffers events in memory \na1.channels.c1.type = memory \na1.channels.c1.capacity = 1000\na1.channels.c1.transactionCapacity = 100\n\n# Bind the source and sink to the channel \na1.sources.r1.channels = c1 \na1.sinks.k1.channel = c1"
+        }
+      }
+    }
+  ],
+  "host_groups" : [
+    {
+      "components" : [
+        {
+          "name" : "NODEMANAGER"
+        },
+        {
+          "name" : "YARN_CLIENT"
+        },
+        {
+          "name" : "HDFS_CLIENT"
+        },
+        {
+          "name" : "HISTORYSERVER"
+        },
+        {
+          "name" : "METRICS_MONITOR"
+        },
+        {
+          "name" : "HBASE_MASTER"
+        },
+        {
+          "name" : "NAMENODE"
+        },
+        {
+          "name" : "TEZ_CLIENT"
+        },
+        {
+          "name" : "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name" : "PIG"
+        },
+        {
+          "name" : "SECONDARY_NAMENODE"
+        },
+        {
+          "name" : "MAPREDUCE2_CLIENT"
+        },
+        {
+          "name" : "ZOOKEEPER_SERVER"
+        },
+        {
+          "name" : "AMBARI_SERVER"
+        },
+        {
+          "name" : "HBASE_REGIONSERVER"
+        },
+        {
+          "name" : "DATANODE"
+        },
+        {
+          "name" : "HBASE_CLIENT"
+        },
+        {
+          "name" : "APP_TIMELINE_SERVER"
+        },
+        {
+          "name" : "FLUME_HANDLER"
+        },
+        {
+          "name" : "METRICS_COLLECTOR"
+        },
+        {
+          "name" : "RESOURCEMANAGER"
+        }
+      ],
+      "configurations" : [ ],
+      "name" : "host_group_1",
+      "cardinality" : "1"
+    }
+  ],
+  "Blueprints" : {
+    "stack_name" : "HDP",
+    "stack_version" : "2.3"
+  }
+}

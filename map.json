@@ -1,0 +1,5 @@
+{ "blueprint":"DockerClusterBP",
+  "default_password" : "admin",
+  "host_groups":[
+    { "name":"host_group_1",
+      "hosts":[ { "fqdn":"hdpkub" } ] } ] }
